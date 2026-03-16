@@ -30,6 +30,29 @@
 
 const LINE = "-----------------------------------------------------";
 let bmr, bmi, normal, danger;
+let lastName, firstName, age, height, weight, gender;
+
+// Get information through pop-up
+lastName = prompt("Enter your last name:");
+firstName = prompt("Enter your first name:");
+age = parseInt(prompt("Enter your age (in years):"));
+
+let heightInput = prompt("Enter your height (in cm):");
+height = parseFloat(heightInput.replace(',', '.')); // To replace the comma with a fullstop
+
+let weightInput = prompt("Enter your weight (in kg):");
+weight = parseFloat(weightInput.replace(',', '.'));
+
+// Get gender
+let validGender = false;
+while (!validGender) {
+    gender = prompt("Enter your gender (type male or female):");
+    if (gender === 'male' || gender === 'female') {
+        validGender = true;
+    } else {
+        alert("Invalid input! Please enter either male or female");
+    }
+}
 
 /**
  * Formulas:
@@ -49,8 +72,18 @@ let bmr, bmi, normal, danger;
  * Be careful. Users make typos. Make sure that you have a valid answer before moving on.
  */
 
+if (gender === 'female') {
+    bmr = 655 + (10 * weight) + (2 * height) - (6 * age);
+} else {
+    bmr = 66 + (14 * weight) + (5 * height) - (7 * age);
+}
+
 // TODO: To calculate the bmi, use the given formula with all the input you have collected.
+bmi = (10000 * weight) / (height * height);
+
 // TODO: Once you have the bmi, determine whether or not the weight is normal and if the condition is dangerous.
+normal = (bmi >= 18 && bmi <= 25) ? "Yes" : "No";
+danger = (bmi < 16 || bmi >= 30) ? "Yes" : "No";
 
 /*
  * TODO: Create the correct output from all your data. Make sure to stick to the promised format! NO EXCEPTIONS!
@@ -71,6 +104,16 @@ let bmr, bmi, normal, danger;
  *   -----------------------------------------------------
  */
 
+console.log(LINE);
+console.log(`Name:\t\t\t${lastName.toUpperCase()}, ${firstName}`);
+console.log(LINE);
+console.log(`Age:\t\t\t${age} Years`);
+console.log(`Height:\t\t\t${height}m`);
+console.log(`Weight:\t\t\t${weight} kg`);
+console.log(`Basal Metabolic Rate:\t${Math.round(bmr)} kcal`);
+console.log(`Body Mass Index:\t${bmi}`);
+console.log(`Normal Weight:\t\t${normal}`);
+console.log(`Danger:\t\t\t${danger}`);
 console.log(LINE); // Logs the dashed-line.
 
 /*
